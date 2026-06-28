@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Infurnus | Premium Logistics & Cab Services - Patna, Bihar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDj55aE-QOzxI0TMb2udek0IqzisbMDKdc
+&libraries=places,geometry&callback=initMap" async defer></script>
+<style>
+:root{--primary:#0f172a;--primary-light:#1e293b;--accent:#f59e0b;--accent-hover:#d97706;--accent-light:rgba(245,158,11,0.1);--text:#f8fafc;--text-muted:#94a3b8;--glass:rgba(15,23,42,0.9);--border:rgba(255,255,255,0.1);--success:#10b981;--danger:#ef4444;--info:#3b82f6}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Inter',sans-serif;background:var(--primary);color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--primary)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+nav{position:fixed;top:0;width:100%;padding:1.2rem 5%;display:flex;justify-content:space-between;align-items:center;z-index:1000;background:transparent;transition:all .4s ease}
+nav.scrolled{background:var(--glass);backdrop-filter:blur(20px);box-shadow:0 4px 30px rgba(0,0,0,0.3);padding:.8rem 5%}
+.logo{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.logo span{color:var(--accent)}.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-weight:500;font-size:.9rem;transition:color .3s ease;position:relative}
+.nav-links a:hover{color:var(--text)}.nav-links a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s ease}
+.nav-links a:hover::after{width:100%}.nav-cta{background:var(--accent);color:var(--primary)!important;padding:.6rem 1.5rem;border-radius:50px;font-weight:600;transition:all .3s ease}
+.nav-cta:hover{background:var(--accent-hover);transform:translateY(-2px)}.nav-cta::after{display:none!important}
+.mobile-menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:0 5%}
+.hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 20% 50%,rgba(245,158,11,0.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 20%,rgba(245,158,11,0.1) 0%,transparent 50%),linear-gradient(135deg,#0f172a 0%,#1e293b 100%);z-index:-2}
+.hero-grid{position:absolute;top:0;left:0;width:100%;height:100%;background-image:linear-gradient(rgba(245,158,11,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(245,158,11,0.03) 1px,transparent 1px);background-size:60px 60px;z-index:-1}
+.hero-content{max-width:1200px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent-light);border:1px solid rgba(245,158,11,0.3);padding:.5rem 1rem;border-radius:50px;font-size:.85rem;color:var(--accent);margin-bottom:1.5rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:900;line-height:1.1;margin-bottom:1.5rem}
+.hero h1 .highlight{color:var(--accent)}.hero p{font-size:1.2rem;color:var(--text-muted);line-height:1.8;margin-bottom:2.5rem;max-width:500px}
+.hero-buttons{display:flex;gap:1rem}.btn{padding:1rem 2.5rem;border-radius:50px;font-weight:600;font-size:1rem;cursor:pointer;transition:all .3s ease;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;border:none}
+.btn-primary{background:var(--accent);color:var(--primary)}.btn-primary:hover{background:var(--accent-hover);transform:translateY(-3px);box-shadow:0 10px 30px rgba(245,158,11,0.3)}
+.btn-outline{background:transparent;color:var(--text);border:2px solid var(--border)}.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
+.btn-sm{padding:.7rem 1.5rem;font-size:.9rem}.btn-block{width:100%;justify-content:center}
+.hero-visual{position:relative}.hero-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:24px;padding:2rem;position:relative;overflow:hidden}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2rem}
+.stat-item{text-align:center;padding:1.5rem;background:rgba(255,255,255,0.03);border-radius:16px;border:1px solid var(--border);transition:all .3s ease}
+.stat-item:hover{background:var(--accent-light);border-color:rgba(245,158,11,0.3);transform:translateY(-5px)}
+.stat-number{font-size:2rem;font-weight:800;color:var(--accent);display:block}.stat-label{font-size:.85rem;color:var(--text-muted);margin-top:.3rem}
+.services{padding:8rem 5%;position:relative}.section-header{text-align:center;max-width:700px;margin:0 auto 4rem}
+.section-tag{display:inline-block;color:var(--accent);font-weight:600;font-size:.9rem;text-transform:uppercase;letter-spacing:2px;margin-bottom:1rem}
+.section-title{font-family:'Playfair Display',serif;font-size:3rem;font-weight:800;margin-bottom:1rem}
+.section-subtitle{color:var(--text-muted);font-size:1.1rem;line-height:1.7}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:1200px;margin:0 auto}
+.service-card{background:var(--primary-light);border:1px solid var(--border);border-radius:24px;padding:3rem 2rem;text-align:center;transition:all .4s ease;position:relative;overflow:hidden}
+.service-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:var(--accent);transform:scaleX(0);transition:transform .4s ease}
+.service-card:hover::before{transform:scaleX(1)}.service-card:hover{transform:translateY(-10px);border-color:rgba(245,158,11,0.3);box-shadow:0 20px 40px rgba(0,0,0,0.3)}
+.service-icon{width:80px;height:80px;background:var(--accent-light);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;color:var(--accent);transition:all .3s ease}
+.service-card:hover .service-icon{background:var(--accent);color:var(--primary);transform:scale(1.1)}
+.service-card h3{font-size:1.5rem;margin-bottom:1rem;font-weight:700}.service-card p{color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem}
+.service-features{list-style:none;text-align:left}.service-features li{padding:.5rem 0;color:var(--text-muted);display:flex;align-items:center;gap:.5rem;font-size:.9rem}
+.service-features li i{color:var(--accent);font-size:.8rem}
+.booking-section{padding:8rem 5%;background:linear-gradient(180deg,var(--primary) 0%,var(--primary-light) 50%,var(--primary) 100%)}
+.booking-container{max-width:900px;margin:0 auto;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:24px;padding:3rem;position:relative;overflow:hidden}
+.booking-container::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-hover))}
+.booking-tabs{display:flex;gap:.5rem;margin-bottom:2rem;background:rgba(255,255,255,0.03);border-radius:16px;padding:.5rem}
+.booking-tab{flex:1;padding:1rem;border:none;background:transparent;color:var(--text-muted);font-weight:600;cursor:pointer;border-radius:12px;transition:all .3s ease;font-size:.95rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.booking-tab.active{background:var(--accent);color:var(--primary)}.booking-tab:hover:not(.active){color:var(--text);background:rgba(255,255,255,0.05)}
+.booking-form{display:none}.booking-form.active{display:block;animation:fadeIn .4s ease}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}.form-group{display:flex;flex-direction:column;gap:.5rem}
+.form-group.full-width{grid-column:1/-1}.form-group label{font-size:.9rem;font-weight:600;color:var(--text)}
+.form-group label .required{color:var(--accent)}.form-control{padding:1rem 1.2rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:1rem;font-family:inherit;transition:all .3s ease}
+.form-control:focus{outline:none;border-color:var(--accent);background:rgba(245,158,11,0.05)}.form-control::placeholder{color:var(--text-muted)}
+select.form-control{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+textarea.form-control{resize:vertical;min-height:100px}.form-hint{font-size:.8rem;color:var(--text-muted);margin-top:.3rem}
+.form-submit{margin-top:2rem}.form-success{display:none;text-align:center;padding:3rem 2rem;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.3);border-radius:16px;animation:fadeIn .5s ease}
+.form-success i{font-size:4rem;color:var(--success);margin-bottom:1rem}.form-success h3{font-size:1.5rem;margin-bottom:.5rem}.form-success p{color:var(--text-muted)}
+.map-container-booking{height:300px;border-radius:16px;border:1px solid var(--border);margin-bottom:1.5rem;overflow:hidden}
+.map-container-pricing{height:350px;border-radius:16px;border:1px solid var(--border);margin-bottom:1.5rem;overflow:hidden}
+.route-info{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.3);border-radius:12px;padding:1rem;margin-top:1rem;display:none}
+.route-info.active{display:flex;align-items:center;gap:1rem}
+.route-info i{color:var(--info);font-size:1.2rem}
+.route-info-text{flex:1}
+.route-info-text strong{color:var(--text);display:block;margin-bottom:.2rem}
+.route-info-text span{color:var(--text-muted);font-size:.85rem}
+.pricing-section{padding:8rem 5%}.pricing-container{max-width:900px;margin:0 auto;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:24px;padding:3rem;position:relative}
+.pricing-container::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-hover))}
+.pricing-display{background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(245,158,11,0.05));border:1px solid rgba(245,158,11,0.3);border-radius:16px;padding:2rem;text-align:center;margin-bottom:2rem}
+.price-label{font-size:.9rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:2px}
+.price-value{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:var(--accent);margin:.5rem 0}
+.price-breakdown{font-size:.9rem;color:var(--text-muted)}.price-breakdown span{color:var(--text);font-weight:600}
+.vehicle-options{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin:1.5rem 0}
+.vehicle-option{padding:1.2rem;background:rgba(255,255,255,0.03);border:2px solid var(--border);border-radius:12px;text-align:center;cursor:pointer;transition:all .3s ease}
+.vehicle-option:hover{border-color:rgba(245,158,11,0.5)}.vehicle-option.selected{border-color:var(--accent);background:var(--accent-light)}
+.vehicle-option i{font-size:1.5rem;color:var(--accent);margin-bottom:.5rem;display:block}
+.vehicle-option span{font-size:.85rem;font-weight:600}.vehicle-option small{display:block;font-size:.75rem;color:var(--text-muted);margin-top:.3rem}
+.coverage{padding:8rem 5%;background:linear-gradient(180deg,var(--primary) 0%,var(--primary-light) 50%,var(--primary) 100%)}
+.coverage-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.map-container{background:var(--primary-light);border:1px solid var(--border);border-radius:24px;padding:2rem;position:relative;overflow:hidden}
+.bihar-map{width:100%;height:400px;position:relative}.map-point{position:absolute;width:12px;height:12px;background:var(--accent);border-radius:50%;cursor:pointer;transition:all .3s ease}
+.map-point::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border:2px solid var(--accent);border-radius:50%;animation:pulse 2s infinite}
+.map-point:hover{transform:scale(1.5)}.map-label{position:absolute;background:var(--glass);padding:.3rem .8rem;border-radius:8px;font-size:.8rem;white-space:nowrap;border:1px solid var(--border);pointer-events:none}
+.coverage-info h2{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:1.5rem}
+.coverage-info p{color:var(--text-muted);line-height:1.8;margin-bottom:2rem;font-size:1.1rem}
+.city-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.city-item{display:flex;align-items:center;gap:.8rem;padding:1rem;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid var(--border);transition:all .3s ease}
+.city-item:hover{background:var(--accent-light);border-color:rgba(245,158,11,0.3);transform:translateX(5px)}.city-item i{color:var(--accent)}
+.fleet{padding:8rem 5%}.fleet-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1200px;margin:0 auto}
+.fleet-card{background:var(--primary-light);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .4s ease;position:relative}
+.fleet-card:hover{transform:translateY(-10px);border-color:rgba(245,158,11,0.3)}.fleet-image{height:180px;background:linear-gradient(135deg,#1e293b 0%,#334155 100%);display:flex;align-items:center;justify-content:center;font-size:4rem;color:var(--accent);position:relative;overflow:hidden}
+.fleet-image::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:50%;background:linear-gradient(to top,var(--primary-light),transparent)}
+.fleet-info{padding:1.5rem}.fleet-info h4{font-size:1.2rem;margin-bottom:.5rem}.fleet-info p{color:var(--text-muted);font-size:.9rem}
+.fleet-specs{display:flex;gap:1rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.fleet-specs span{font-size:.8rem;color:var(--text-muted);display:flex;align-items:center;gap:.3rem}.fleet-specs i{color:var(--accent)}
+.why-us{padding:8rem 5%;background:var(--primary-light);position:relative;overflow:hidden}
+.why-us::before{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(245,158,11,0.05) 0%,transparent 70%);border-radius:50%}
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;max-width:1000px;margin:0 auto}
+.feature-box{display:flex;gap:1.5rem;padding:2rem;background:var(--primary);border-radius:20px;border:1px solid var(--border);transition:all .3s ease}
+.feature-box:hover{border-color:rgba(245,158,11,0.3);transform:translateY(-5px)}.feature-icon{width:60px;height:60px;min-width:60px;background:var(--accent-light);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--accent)}
+.feature-text h4{font-size:1.2rem;margin-bottom:.5rem}.feature-text p{color:var(--text-muted);font-size:.95rem;line-height:1.6}
+.recruitment-section{padding:8rem 5%;background:linear-gradient(180deg,var(--primary-light) 0%,var(--primary) 100%)}
+.recruitment-container{max-width:1200px;margin:0 auto}.recruitment-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.recruitment-info h2{font-family:'Playfair Display',serif;font-size:3rem;margin-bottom:1.5rem}
+.recruitment-info>p{color:var(--text-muted);line-height:1.8;margin-bottom:2rem;font-size:1.1rem}
+.benefits-list{list-style:none}.benefits-list li{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:1rem;border:1px solid var(--border);transition:all .3s ease}
+.benefits-list li:hover{background:var(--accent-light);border-color:rgba(245,158,11,0.3);transform:translateX(5px)}
+.benefits-list li i{color:var(--accent);font-size:1.2rem;margin-top:.2rem}.benefits-list li strong{display:block;color:var(--text);margin-bottom:.3rem}
+.benefits-list li span{color:var(--text-muted);font-size:.9rem}
+.recruitment-form-wrapper{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:24px;padding:2.5rem;position:relative}
+.recruitment-form-wrapper::before{content:'';position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--accent),var(--accent-hover))}
+.recruitment-form-wrapper h3{font-size:1.5rem;margin-bottom:.5rem}.recruitment-form-wrapper>p{color:var(--text-muted);margin-bottom:2rem;font-size:.95rem}
+.file-upload{position:relative;padding:2rem;border:2px dashed var(--border);border-radius:12px;text-align:center;cursor:pointer;transition:all .3s ease}
+.file-upload:hover{border-color:var(--accent);background:var(--accent-light)}.file-upload input{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.file-upload i{font-size:2rem;color:var(--accent);margin-bottom:.5rem}.file-upload p{color:var(--text-muted);font-size:.9rem}.file-upload p strong{color:var(--text)}
+.testimonials{padding:8rem 5%;background:var(--primary-light)}.testimonial-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:1200px;margin:0 auto}
+.testimonial-card{background:var(--primary);border:1px solid var(--border);border-radius:20px;padding:2.5rem;position:relative;transition:all .3s ease}
+.testimonial-card:hover{transform:translateY(-5px);border-color:rgba(245,158,11,0.3)}
+.testimonial-card::before{content:'"';position:absolute;top:1rem;right:2rem;font-family:'Playfair Display',serif;font-size:5rem;color:rgba(245,158,11,0.1);line-height:1}
+.stars{color:var(--accent);margin-bottom:1rem;font-size:.9rem}.testimonial-text{color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem;font-style:italic}
+.testimonial-author{display:flex;align-items:center;gap:1rem}.author-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-hover));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--primary)}
+.author-info h5{font-size:1rem;margin-bottom:.2rem}.author-info span{font-size:.85rem;color:var(--text-muted)}
+.cta{padding:8rem 5%;text-align:center;position:relative;overflow:hidden}.cta-bg{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(245,158,11,0.1) 0%,transparent 70%);z-index:-1}
+.cta-content{max-width:700px;margin:0 auto}.cta h2{font-family:'Playfair Display',serif;font-size:3.5rem;margin-bottom:1.5rem}
+.cta p{color:var(--text-muted);font-size:1.2rem;margin-bottom:2.5rem;line-height:1.7}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-phone{display:inline-flex;align-items:center;gap:.8rem;margin-top:2rem;padding:1rem 2rem;background:var(--accent-light);border:1px solid rgba(245,158,11,0.3);border-radius:50px;color:var(--accent);font-size:1.2rem;font-weight:600;text-decoration:none;transition:all .3s ease}
+.cta-phone:hover{background:var(--accent);color:var(--primary)}
+.chat-widget{position:fixed;bottom:2rem;right:2rem;z-index:9999}.chat-toggle{width:60px;height:60px;border-radius:50%;background:var(--accent);border:none;color:var(--primary);font-size:1.5rem;cursor:pointer;box-shadow:0 4px 20px rgba(245,158,11,0.4);transition:all .3s ease;display:flex;align-items:center;justify-content:center}
+.chat-toggle:hover{transform:scale(1.1)}.chat-toggle .close-icon{display:none}.chat-toggle.active .chat-icon{display:none}.chat-toggle.active .close-icon{display:block}
+.chat-box{position:absolute;bottom:75px;right:0;width:380px;max-height:500px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:20px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 20px 50px rgba(0,0,0,0.5)}
+.chat-box.active{display:flex;animation:slideUp .3s ease}@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.chat-header{padding:1.2rem 1.5rem;background:var(--accent-light);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1rem}
+.chat-avatar{width:40px;height:40px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:var(--primary);font-weight:700}
+.chat-header-info h4{font-size:1rem}.chat-header-info span{font-size:.8rem;color:var(--success);display:flex;align-items:center;gap:.3rem}
+.chat-header-info span::before{content:'';width:8px;height:8px;background:var(--success);border-radius:50%;display:inline-block}
+.chat-body{flex:1;padding:1.5rem;overflow-y:auto;max-height:300px;display:flex;flex-direction:column;gap:1rem}
+.chat-message{max-width:80%;padding:.8rem 1rem;border-radius:16px;font-size:.9rem;line-height:1.5;animation:fadeIn .3s ease}
+.chat-message.bot{background:rgba(255,255,255,0.05);align-self:flex-start;border-bottom-left-radius:4px}
+.chat-message.user{background:var(--accent);color:var(--primary);align-self:flex-end;border-bottom-right-radius:4px}
+.chat-quick-replies{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.chat-quick-reply{padding:.5rem 1rem;background:var(--accent-light);border:1px solid rgba(245,158,11,0.3);border-radius:20px;font-size:.8rem;color:var(--accent);cursor:pointer;transition:all .2s ease}
+.chat-quick-reply:hover{background:var(--accent);color:var(--primary)}.chat-footer{padding:1rem 1.5rem;border-top:1px solid var(--border);display:flex;gap:.5rem}
+.chat-input{flex:1;padding:.8rem 1rem;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:50px;color:var(--text);font-family:inherit;font-size:.9rem;outline:none}
+.chat-input:focus{border-color:var(--accent)}.chat-send{width:40px;height:40px;border-radius:50%;background:var(--accent);border:none;color:var(--primary);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease}
+.chat-send:hover{background:var(--accent-hover);transform:scale(1.1)}.chat-badge{position:absolute;top:-5px;right:-5px;width:20px;height:20px;background:var(--danger);border-radius:50%;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;animation:pulse 2s infinite}
+footer{background:var(--primary);border-top:1px solid var(--border);padding:5rem 5% 2rem}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1200px;margin:0 auto 4rem}
+.footer-brand .logo{margin-bottom:1.5rem;display:inline-flex}.footer-brand p{color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem}
+.social-links{display:flex;gap:1rem}.social-links a{width:40px;height:40px;border-radius:10px;background:var(--primary-light);display:flex;align-items:center;justify-content:center;color:var(--text-muted);text-decoration:none;transition:all .3s ease;border:1px solid var(--border)}
+.social-links a:hover{background:var(--accent);color:var(--primary);border-color:var(--accent)}.footer-column h4{font-size:1.1rem;margin-bottom:1.5rem;color:var(--text)}
+.footer-column ul{list-style:none}.footer-column li{margin-bottom:.8rem}.footer-column a{color:var(--text-muted);text-decoration:none;transition:color .3s ease;display:flex;align-items:center;gap:.5rem}
+.footer-column a:hover{color:var(--accent)}.footer-column a i{font-size:.8rem}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom p{color:var(--text-muted);font-size:.9rem}
+.toast-container{position:fixed;top:2rem;right:2rem;z-index:10000;display:flex;flex-direction:column;gap:.5rem}
+.toast{padding:1rem 1.5rem;border-radius:12px;color:#fff;font-weight:500;animation:slideInRight .3s ease;max-width:350px;box-shadow:0 10px 30px rgba(0,0,0,0.3)}
+.toast.success{background:var(--success)}.toast.error{background:var(--danger)}.toast.info{background:var(--info)}
+@keyframes slideInRight{from{opacity:0;transform:translateX(100%)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}50%{transform:translate(-50%,-50%) scale(1.5);opacity:0}}
+.scroll-reveal{opacity:0;transform:translateY(50px);transition:all .8s ease}.scroll-reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:1024px){.hero-content{grid-template-columns:1fr;text-align:center}.hero h1{font-size:3rem}.hero p{margin:0 auto 2rem}.hero-buttons{justify-content:center}.services-grid{grid-template-columns:repeat(2,1fr)}.fleet-grid{grid-template-columns:repeat(2,1fr)}.coverage-content{grid-template-columns:1fr}.features-grid{grid-template-columns:1fr}.testimonial-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.booking-container{padding:2rem}.form-grid{grid-template-columns:1fr}.recruitment-grid{grid-template-columns:1fr}.chat-box{width:340px;right:-1rem}.vehicle-options{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.nav-links{display:none;position:absolute;top:100%;left:0;width:100%;background:var(--glass);backdrop-filter:blur(20px);flex-direction:column;padding:2rem;gap:1.5rem;border-top:1px solid var(--border)}.nav-links.active{display:flex}.mobile-menu-btn{display:block}.hero h1{font-size:2.5rem}.section-title{font-size:2rem}.services-grid{grid-template-columns:1fr}.fleet-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr}.cta h2{font-size:2rem}.booking-tabs{flex-direction:column}.vehicle-options{grid-template-columns:1fr}.price-value{font-size:2.5rem}.chat-box{width:calc(100vw - 2rem);right:-1rem;bottom:70px}}
+</style>
+</head>
+<body>
+<div class="toast-container" id="toastContainer"></div>
+<nav id="navbar">
+<a href="#" class="logo"><i class="fas fa-fire"></i> Infur<span>nus</span></a>
+<ul class="nav-links" id="navLinks">
+<li><a href="#home">Home</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#booking">Book Now</a></li>
+<li><a href="#pricing">Pricing</a></li>
+<li><a href="#coverage">Coverage</a></li>
+<li><a href="#fleet">Fleet</a></li>
+<li><a href="#recruitment">Drive With Us</a></li>
+<li><a href="#contact" class="nav-cta">Contact</a></li>
+</ul>
+<button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+</nav>
+
+<section class="hero" id="home">
+<div class="hero-bg"></div>
+<div class="hero-grid"></div>
+<div class="hero-content">
+<div class="hero-text">
+<div class="hero-badge"><i class="fas fa-map-marker-alt"></i> Based in Patna, Serving All of Bihar</div>
+<h1>Connecting destinations,<br><span class="highlight">seamlessly.</span></h1>
+<p>Premium logistics vehicles and intercity cab services across every district of Bihar. Reliable, safe, and always on time.</p>
+<div class="hero-buttons">
+<a href="#booking" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book a Ride</a>
+<a href="#services" class="btn btn-outline"><i class="fas fa-arrow-right"></i> Explore Services</a>
+</div>
+</div>
+<div class="hero-visual">
+<div class="hero-card">
+<div style="text-align:center;padding:2rem 0;">
+<i class="fas fa-truck-moving" style="font-size:5rem;color:var(--accent);margin-bottom:1rem;"></i>
+<h3 style="font-size:1.5rem;margin-bottom:.5rem;">24/7 Operations</h3>
+<p style="color:var(--text-muted);">Round the clock service across Bihar</p>
+</div>
+<div class="stats-row">
+<div class="stat-item"><span class="stat-number">38</span><span class="stat-label">Districts Covered</span></div>
+<div class="stat-item"><span class="stat-number">500+</span><span class="stat-label">Vehicles Fleet</span></div>
+<div class="stat-item"><span class="stat-number">50K+</span><span class="stat-label">Happy Clients</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="services" id="services">
+<div class="section-header scroll-reveal">
+<span class="section-tag">What We Offer</span>
+<h2 class="section-title">Our Services</h2>
+<p class="section-subtitle">Comprehensive transportation solutions tailored for individuals and businesses across Bihar</p>
+</div>
+<div class="services-grid">
+<div class="service-card scroll-reveal">
+<div class="service-icon"><i class="fas fa-truck"></i></div>
+<h3>Logistics Vehicles</h3>
+<p>Full-scale logistics and cargo transportation for businesses. From small parcels to heavy freight, we deliver across Bihar efficiently.</p>
+<ul class="service-features">
+<li><i class="fas fa-check"></i> Same-day delivery options</li>
+<li><i class="fas fa-check"></i> Real-time tracking</li>
+<li><i class="fas fa-check"></i> Bulk cargo handling</li>
+<li><i class="fas fa-check"></i> Insurance coverage</li>
+</ul>
+</div>
+<div class="service-card scroll-reveal">
+<div class="service-icon"><i class="fas fa-road"></i></div>
+<h3>Intercity Cabs</h3>
+<p>Seamless intercity travel between Patna and all major cities in Bihar. Comfortable rides with professional drivers.</p>
+<ul class="service-features">
+<li><i class="fas fa-check"></i> AC vehicles guaranteed</li>
+<li><i class="fas fa-check"></i> Experienced drivers</li>
+<li><i class="fas fa-check"></i> Fixed transparent pricing</li>
+<li><i class="fas fa-check"></i> Door-to-door pickup</li>
+</ul>
+</div>
+<div class="service-card scroll-reveal">
+<div class="service-icon"><i class="fas fa-taxi"></i></div>
+<h3>Hourly & Daily Rentals</h3>
+<p>Flexible cab rentals by the hour or day for local travel, business meetings, weddings, and special occasions in Patna.</p>
+<ul class="service-features">
+<li><i class="fas fa-check"></i> Flexible packages</li>
+<li><i class="fas fa-check"></i> Multiple vehicle options</li>
+<li><i class="fas fa-check"></i> Corporate accounts</li>
+<li><i class="fas fa-check"></i> 24/7 availability</li>
+</ul>
+</div>
+</div>
+</section>
+<section class="booking-section" id="booking">
+<div class="section-header scroll-reveal">
+<span class="section-tag">Book Now</span>
+<h2 class="section-title">Book Your Ride</h2>
+<p class="section-subtitle">Quick and easy booking with real-time route calculation</p>
+</div>
+<div class="booking-container scroll-reveal">
+<div class="booking-tabs">
+<button class="booking-tab active" data-tab="cab"><i class="fas fa-taxi"></i> Cab Booking</button>
+<button class="booking-tab" data-tab="logistics"><i class="fas fa-truck"></i> Logistics</button>
+<button class="booking-tab" data-tab="rental"><i class="fas fa-clock"></i> Hourly Rental</button>
+</div>
+
+<form class="booking-form active" id="cabForm">
+<div class="form-grid">
+<div class="form-group"><label>Full Name <span class="required">*</span></label><input type="text" name="fullName" class="form-control" placeholder="Enter your name" required></div>
+<div class="form-group"><label>Phone Number <span class="required">*</span></label><input type="tel" name="phone" class="form-control" placeholder="+91 91537 87859" required></div>
+<div class="form-group full-width"><label>Pickup Location <span class="required">*</span></label><input type="text" id="cabPickupInput" name="pickupLocation" class="form-control" placeholder="Enter pickup address or city" required></div>
+<div class="form-group full-width"><label>Drop Location <span class="required">*</span></label><input type="text" id="cabDropInput" name="dropLocation" class="form-control" placeholder="Enter drop address or city" required></div>
+<div class="form-group full-width"><div class="route-info" id="cabRouteInfo"><i class="fas fa-route"></i><div class="route-info-text"><strong id="cabRouteDistance">--</strong><span id="cabRouteDuration">Select pickup and drop to see route details</span></div></div></div>
+<div class="form-group"><label>Pickup Date <span class="required">*</span></label><input type="date" name="pickupDate" class="form-control" required></div>
+<div class="form-group"><label>Pickup Time <span class="required">*</span></label><input type="time" name="pickupTime" class="form-control" required></div>
+<div class="form-group"><label>Vehicle Type</label><select name="vehicleType" class="form-control" id="cabVehicleType"><option value="sedan">Sedan (4 Seater) - Rs.15/km</option><option value="suv">SUV / MUV (7 Seater) - Rs.14/km</option><option value="luxury">Luxury Sedan - Rs.18/km</option></select></div>
+<div class="form-group"><label>Number of Passengers</label><select name="passengers" class="form-control"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7+</option></select></div>
+<div class="form-group full-width"><label>Special Requests</label><textarea name="specialRequests" class="form-control" placeholder="Any specific requirements..."></textarea></div>
+</div>
+<div class="form-submit">
+<button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane"></i> Submit Booking Request</button>
+<p class="form-hint" style="text-align:center;margin-top:1rem;">Our team will call you within 15 minutes to confirm your booking.</p>
+</div>
+</form>
+
+<form class="booking-form" id="logisticsForm">
+<div class="form-grid">
+<div class="form-group"><label>Company / Sender Name <span class="required">*</span></label><input type="text" name="companyName" class="form-control" placeholder="Enter name" required></div>
+<div class="form-group"><label>Phone Number <span class="required">*</span></label><input type="tel" name="phone" class="form-control" placeholder="+91 91537 87859" required></div>
+<div class="form-group full-width"><label>Pickup Address <span class="required">*</span></label><input type="text" id="logisticsPickupInput" name="pickupAddress" class="form-control" placeholder="Full pickup address" required></div>
+<div class="form-group full-width"><label>Delivery Address <span class="required">*</span></label><input type="text" id="logisticsDropInput" name="dropAddress" class="form-control" placeholder="Full delivery address" required></div>
+<div class="form-group full-width"><div class="route-info" id="logisticsRouteInfo"><i class="fas fa-route"></i><div class="route-info-text"><strong id="logisticsRouteDistance">--</strong><span id="logisticsRouteDuration">Select addresses to see route details</span></div></div></div>
+<div class="form-group"><label>Cargo Type <span class="required">*</span></label><select name="cargoType" class="form-control" required><option value="">Select type</option><option>Documents / Small Parcel</option><option>Household Items</option><option>Electronics / Fragile</option><option>Industrial Goods</option><option>Raw Materials</option><option>Other</option></select></div>
+<div class="form-group"><label>Vehicle Required</label><select name="vehicleRequired" class="form-control"><option>Pickup Truck (1 Ton)</option><option>Medium Truck (3-5 Ton)</option><option>Heavy Truck (10+ Ton)</option><option>Container Truck</option></select></div>
+<div class="form-group"><label>Approximate Weight (kg)</label><input type="number" name="cargoWeight" class="form-control" placeholder="e.g. 500"></div>
+<div class="form-group"><label>Pickup Date <span class="required">*</span></label><input type="date" name="pickupDate" class="form-control" required></div>
+<div class="form-group full-width"><label>Cargo Description</label><textarea name="cargoDescription" class="form-control" placeholder="Describe your cargo, dimensions, special handling needs..."></textarea></div>
+</div>
+<div class="form-submit">
+<button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane"></i> Get Logistics Quote</button>
+<p class="form-hint" style="text-align:center;margin-top:1rem;">We will send you a detailed quote within 30 minutes.</p>
+</div>
+</form>
+
+<form class="booking-form" id="rentalForm">
+<div class="form-grid">
+<div class="form-group"><label>Full Name <span class="required">*</span></label><input type="text" name="fullName" class="form-control" placeholder="Enter your name" required></div>
+<div class="form-group"><label>Phone Number <span class="required">*</span></label><input type="tel" name="phone" class="form-control" placeholder="+91 91537 87859" required></div>
+<div class="form-group"><label>Rental Type <span class="required">*</span></label><select name="rentalType" class="form-control" required><option value="">Select package</option><option>Hourly (Min 4 hours)</option><option>Half Day (8 hours)</option><option>Full Day (12 hours)</option><option>Weekly</option><option>Monthly</option></select></div>
+<div class="form-group"><label>Vehicle Type</label><select name="vehicleType" class="form-control"><option>Sedan (4 Seater)</option><option>SUV / MUV (7 Seater)</option><option>Tempo Traveller (12 Seater)</option></select></div>
+<div class="form-group"><label>Start Date <span class="required">*</span></label><input type="date" name="startDate" class="form-control" required></div>
+<div class="form-group"><label>Start Time <span class="required">*</span></label><input type="time" name="startTime" class="form-control" required></div>
+<div class="form-group"><label>Pickup Location</label><input type="text" name="pickupLocation" class="form-control" placeholder="Address in Patna"></div>
+<div class="form-group"><label>Purpose</label><select name="purpose" class="form-control"><option>Personal Use</option><option>Business / Corporate</option><option>Wedding / Event</option><option>Tourism</option><option>Airport Transfer</option></select></div>
+<div class="form-group full-width"><label>Additional Notes</label><textarea name="notes" class="form-control" placeholder="Any specific requirements..."></textarea></div>
+</div>
+<div class="form-submit">
+<button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane"></i> Request Rental Quote</button>
+<p class="form-hint" style="text-align:center;margin-top:1rem;">Best rates guaranteed for daily and monthly rentals in Patna.</p>
+</div>
+</form>
+
+<div class="form-success" id="formSuccess">
+<i class="fas fa-check-circle"></i>
+<h3>Booking Request Received!</h3>
+<p>Our team will contact you shortly to confirm your booking.</p>
+</div>
+</div>
+</section>
+
+<section class="pricing-section" id="pricing">
+<div class="section-header scroll-reveal">
+<span class="section-tag">Estimate</span>
+<h2 class="section-title">Fare Calculator</h2>
+<p class="section-subtitle">Get real-time fare estimates based on actual road distance</p>
+</div>
+<div class="pricing-container scroll-reveal">
+<div id="pricingMap" class="map-container-pricing"></div>
+<div class="pricing-display">
+<div class="price-label">Estimated Fare</div>
+<div class="price-value" id="priceValue">Rs.0</div>
+<div class="price-breakdown">
+<span id="distanceText">0 km</span> distance &middot; <span id="vehicleText">Sedan</span> &middot; <span id="durationText">--</span>
+</div>
+</div>
+<div class="form-grid">
+<div class="form-group"><label>From</label><input type="text" id="fromAddress" class="form-control" placeholder="Enter pickup location"></div>
+<div class="form-group"><label>To</label><input type="text" id="toAddress" class="form-control" placeholder="Enter destination"></div>
+</div>
+<div style="margin-top:1.5rem;">
+<label style="font-weight:600;margin-bottom:.8rem;display:block;">Vehicle Type</label>
+<div class="vehicle-options">
+<div class="vehicle-option selected" data-rate="15" data-name="Sedan"><i class="fas fa-car"></i><span>Sedan</span><small>Rs.15/km</small></div>
+<div class="vehicle-option" data-rate="14" data-name="SUV"><i class="fas fa-taxi"></i><span>SUV / MUV</span><small>Rs.14/km</small></div>
+<div class="vehicle-option" data-rate="12" data-name="Pickup"><i class="fas fa-truck-pickup"></i><span>Pickup</span><small>Rs.12/km</small></div>
+<div class="vehicle-option" data-rate="18" data-name="Luxury"><i class="fas fa-car-side"></i><span>Luxury</span><small>Rs.18/km</small></div>
+</div>
+</div>
+<div style="margin-top:1.5rem;padding:1rem;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid var(--border);">
+<div style="display:flex;justify-content:space-between;margin-bottom:.5rem;"><span style="color:var(--text-muted);">Base Fare</span><span id="baseFare">Rs.0</span></div>
+<div style="display:flex;justify-content:space-between;padding-top:.5rem;border-top:1px solid var(--border);"><span style="font-weight:700;">Total Estimate</span><span style="font-weight:700;color:var(--accent);" id="totalFare">Rs.0</span></div>
+</div>
+<div style="margin-top:1.5rem;text-align:center;">
+<a href="#booking" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book This Ride</a>
+<p class="form-hint" style="margin-top:.8rem;">Final fare may vary based on tolls and actual route. No hidden charges.</p>
+</div>
+</div>
+</section>
+<section class="coverage" id="coverage">
+<div class="coverage-content">
+<div class="coverage-visual scroll-reveal">
+<div class="map-container">
+<div class="bihar-map" id="biharMap">
+<div class="map-point" style="top:30%;left:45%;" data-city="Patna"></div>
+<div class="map-label" style="top:25%;left:40%;">Patna (HQ)</div>
+<div class="map-point" style="top:20%;left:25%;" data-city="Muzaffarpur"></div>
+<div class="map-label" style="top:15%;left:20%;">Muzaffarpur</div>
+<div class="map-point" style="top:15%;left:60%;" data-city="Bhagalpur"></div>
+<div class="map-label" style="top:10%;left:55%;">Bhagalpur</div>
+<div class="map-point" style="top:50%;left:20%;" data-city="Gaya"></div>
+<div class="map-label" style="top:55%;left:15%;">Gaya</div>
+<div class="map-point" style="top:60%;left:55%;" data-city="Purnia"></div>
+<div class="map-label" style="top:65%;left:50%;">Purnia</div>
+<div class="map-point" style="top:40%;left:75%;" data-city="Darbhanga"></div>
+<div class="map-label" style="top:35%;left:70%;">Darbhanga</div>
+<div class="map-point" style="top:70%;left:35%;" data-city="Sasaram"></div>
+<div class="map-label" style="top:75%;left:30%;">Sasaram</div>
+<div style="position:absolute;bottom:1rem;left:50%;transform:translateX(-50%);color:var(--text-muted);font-size:.85rem;"><i class="fas fa-info-circle"></i> And 30+ more locations across Bihar</div>
+</div>
+</div>
+</div>
+<div class="coverage-info scroll-reveal">
+<span class="section-tag">Our Reach</span>
+<h2>All of Bihar,<br>One Network</h2>
+<p>From the bustling streets of Patna to the serene landscapes of every district, Infurnus connects Bihar like never before.</p>
+<div class="city-list">
+<div class="city-item"><i class="fas fa-map-pin"></i><span>Patna</span></div>
+<div class="city-item"><i class="fas fa-map-pin"></i><span>Muzaffarpur</span></div>
+<div class="city-item"><i class="fas fa-map-pin"></i><span>Gaya</span></div>
+<div class="city-item"><i class="fas fa-map-pin"></i><span>Bhagalpur</span></div>
+<div class="city-item"><i class="fas fa-map-pin"></i><span>Darbhanga</span></div>
+<div class="city-item"><i class="fas fa-map-pin"></i><span>Purnia</span></div>
+<div class="city-item"><i class="fas fa-map-pin"></i><span>Ara</span></div>
+<div class="city-item"><i class="fas fa-map-pin"></i><span>Begusarai</span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="fleet" id="fleet">
+<div class="section-header scroll-reveal">
+<span class="section-tag">Our Fleet</span>
+<h2 class="section-title">Vehicles for Every Need</h2>
+<p class="section-subtitle">From compact cabs to heavy-duty trucks, choose the perfect vehicle for your journey</p>
+</div>
+<div class="fleet-grid">
+<div class="fleet-card scroll-reveal">
+<div class="fleet-image"><i class="fas fa-car"></i></div>
+<div class="fleet-info"><h4>Sedan Cabs</h4><p>Comfortable 4-seater for intercity and local travel</p><div class="fleet-specs"><span><i class="fas fa-user"></i> 4 Seats</span><span><i class="fas fa-suitcase"></i> 2 Bags</span></div></div>
+</div>
+<div class="fleet-card scroll-reveal">
+<div class="fleet-image"><i class="fas fa-taxi"></i></div>
+<div class="fleet-info"><h4>SUV / MUV</h4><p>Spacious 6-7 seater for family trips and groups</p><div class="fleet-specs"><span><i class="fas fa-user"></i> 7 Seats</span><span><i class="fas fa-suitcase"></i> 4 Bags</span></div></div>
+</div>
+<div class="fleet-card scroll-reveal">
+<div class="fleet-image"><i class="fas fa-truck-pickup"></i></div>
+<div class="fleet-info"><h4>Pickup Trucks</h4><p>Light cargo and parcel delivery vehicles</p><div class="fleet-specs"><span><i class="fas fa-weight-hanging"></i> 1 Ton</span><span><i class="fas fa-box"></i> 15 Boxes</span></div></div>
+</div>
+<div class="fleet-card scroll-reveal">
+<div class="fleet-image"><i class="fas fa-truck-moving"></i></div>
+<div class="fleet-info"><h4>Heavy Trucks</h4><p>Full-load logistics and bulk transportation</p><div class="fleet-specs"><span><i class="fas fa-weight-hanging"></i> 10+ Ton</span><span><i class="fas fa-route"></i> All Bihar</span></div></div>
+</div>
+</div>
+</section>
+
+<section class="why-us" id="why-us">
+<div class="section-header scroll-reveal">
+<span class="section-tag">Why Infurnus</span>
+<h2 class="section-title">The Infurnus Advantage</h2>
+<p class="section-subtitle">What makes us Bihar's preferred logistics and cab partner</p>
+</div>
+<div class="features-grid">
+<div class="feature-box scroll-reveal">
+<div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+<div class="feature-text"><h4>Safety First</h4><p>All vehicles are GPS-tracked, regularly maintained, and driven by verified professionals. Your safety is our top priority on every journey.</p></div>
+</div>
+<div class="feature-box scroll-reveal">
+<div class="feature-icon"><i class="fas fa-clock"></i></div>
+<div class="feature-text"><h4>Always On Time</h4><p>We understand the value of time. Our punctuality record speaks for itself - 98% on-time delivery and pickup across all services.</p></div>
+</div>
+<div class="feature-box scroll-reveal">
+<div class="feature-icon"><i class="fas fa-tags"></i></div>
+<div class="feature-text"><h4>Transparent Pricing</h4><p>No hidden charges, no surge pricing. Get upfront quotes for every ride and logistics shipment. What you see is what you pay.</p></div>
+</div>
+<div class="feature-box scroll-reveal">
+<div class="feature-icon"><i class="fas fa-headset"></i></div>
+<div class="feature-text"><h4>24/7 Support</h4><p>Our dedicated support team is available round the clock to assist with bookings, tracking, and any concerns during your journey.</p></div>
+</div>
+</div>
+</section>
+
+<section class="recruitment-section" id="recruitment">
+<div class="section-header scroll-reveal">
+<span class="section-tag">Join Our Team</span>
+<h2 class="section-title">Drive With Infurnus</h2>
+<p class="section-subtitle">We are always looking for skilled drivers to join our growing fleet across Bihar</p>
+</div>
+<div class="recruitment-container">
+<div class="recruitment-grid">
+<div class="recruitment-info scroll-reveal">
+<h2>Why Drive<br>With Us?</h2>
+<p>Join one of Bihar's fastest-growing transportation networks. We offer competitive earnings, flexible schedules, and a supportive work environment for all our driver partners.</p>
+<ul class="benefits-list">
+<li><i class="fas fa-rupee-sign"></i><div><strong>Competitive Earnings</strong><span>Above-market pay with daily/weekly settlement options and performance bonuses.</span></div></li>
+<li><i class="fas fa-calendar-alt"></i><div><strong>Flexible Schedule</strong><span>Choose your own hours. Full-time, part-time, or weekend shifts available.</span></div></li>
+<li><i class="fas fa-gas-pump"></i><div><strong>Fuel & Maintenance Support</strong><span>We help with fuel advances and tie-ups with trusted service centers for vehicle maintenance.</span></div></li>
+<li><i class="fas fa-shield-alt"></i><div><strong>Insurance Coverage</strong><span>Comprehensive insurance for drivers and vehicles while on duty.</span></div></li>
+<li><i class="fas fa-graduation-cap"></i><div><strong>Training Provided</strong><span>Free onboarding and customer service training to help you succeed.</span></div></li>
+<li><i class="fas fa-mobile-alt"></i><div><strong>Driver App</strong><span>Easy-to-use app for accepting rides, tracking earnings, and navigation.</span></div></li>
+</ul>
+</div>
+<div class="recruitment-form-wrapper scroll-reveal">
+<h3>Apply Now</h3>
+<p>Fill in your details and we will get back to you within 48 hours.</p>
+<form id="driverForm">
+<div class="form-grid">
+<div class="form-group"><label>Full Name <span class="required">*</span></label><input type="text" name="fullName" class="form-control" placeholder="Your full name" required></div>
+<div class="form-group"><label>Phone Number <span class="required">*</span></label><input type="tel" name="phone" class="form-control" placeholder="+91 91537 87859" required></div>
+<div class="form-group"><label>Email Address</label><input type="email" name="email" class="form-control" placeholder="your@email.com"></div>
+<div class="form-group"><label>City <span class="required">*</span></label><select name="city" class="form-control" required><option value="">Select city</option><option>Patna</option><option>Muzaffarpur</option><option>Gaya</option><option>Bhagalpur</option><option>Darbhanga</option><option>Other</option></select></div>
+<div class="form-group"><label>Driving Experience <span class="required">*</span></label><select name="experience" class="form-control" required><option value="">Select experience</option><option>Less than 1 year</option><option>1-3 years</option><option>3-5 years</option><option>5+ years</option></select></div>
+<div class="form-group"><label>Vehicle Type (if own)</label><select name="vehicleType" class="form-control"><option>No vehicle - Need company vehicle</option><option>Sedan</option><option>SUV / MUV</option><option>Pickup Truck</option><option>Tempo Traveller</option><option>Other</option></select></div>
+<div class="form-group"><label>Driving License Number <span class="required">*</span></label><input type="text" name="licenseNumber" class="form-control" placeholder="DL number" required></div>
+<div class="form-group"><label>Aadhaar Number</label><input type="text" name="aadhaarNumber" class="form-control" placeholder="XXXX XXXX XXXX"></div>
+<div class="form-group full-width">
+<div class="file-upload">
+<input type="file" name="licenseFile" accept=".pdf,.jpg,.png">
+<i class="fas fa-cloud-upload-alt"></i>
+<p><strong>Upload Driving License</strong><br>PDF, JPG, or PNG (Max 5MB)</p>
+</div>
+</div>
+<div class="form-group full-width">
+<div class="file-upload">
+<input type="file" name="photoFile" accept=".jpg,.png">
+<i class="fas fa-camera"></i>
+<p><strong>Upload Passport Photo</strong><br>JPG or PNG (Max 2MB)</p>
+</div>
+</div>
+<div class="form-group full-width"><label>Why do you want to join Infurnus?</label><textarea name="about" class="form-control" placeholder="Tell us about yourself..."></textarea></div>
+</div>
+<div class="form-submit">
+<button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane"></i> Submit Application</button>
+<p class="form-hint" style="text-align:center;margin-top:1rem;">By applying, you agree to our driver partner terms and conditions.</p>
+</div>
+</form>
+</div>
+</div>
+</div>
+</section>
+
+<section class="testimonials" id="testimonials">
+<div class="section-header scroll-reveal">
+<span class="section-tag">Testimonials</span>
+<h2 class="section-title">What Our Clients Say</h2>
+<p class="section-subtitle">Trusted by thousands across Bihar</p>
+</div>
+<div class="testimonial-grid">
+<div class="testimonial-card scroll-reveal">
+<div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+<p class="testimonial-text">Infurnus has transformed how we handle deliveries for our business. Their logistics service from Patna to Muzaffarpur is incredibly reliable and cost-effective.</p>
+<div class="testimonial-author"><div class="author-avatar">RK</div><div class="author-info"><h5>Rajesh Kumar</h5><span>Business Owner, Patna</span></div></div>
+</div>
+<div class="testimonial-card scroll-reveal">
+<div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+<p class="testimonial-text">I book their intercity cabs regularly for family trips to Gaya. The drivers are courteous, vehicles are clean, and pricing is very fair. Highly recommended!</p>
+<div class="testimonial-author"><div class="author-avatar">PS</div><div class="author-info"><h5>Priya Sharma</h5><span>Regular Customer</span></div></div>
+</div>
+<div class="testimonial-card scroll-reveal">
+<div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+<p class="testimonial-text">We hired their hourly rental service for a corporate event in Patna. The process was seamless and the vehicle arrived exactly on time. Professional service!</p>
+<div class="testimonial-author"><div class="author-avatar">AV</div><div class="author-info"><h5>Amit Verma</h5><span>Event Manager, Patna</span></div></div>
+</div>
+</div>
+</section>
+
+<section class="cta" id="contact">
+<div class="cta-bg"></div>
+<div class="cta-content scroll-reveal">
+<span class="section-tag">Get Started</span>
+<h2>Ready to Move?</h2>
+<p>Whether you need a quick cab ride across Patna, an intercity journey, or logistics support for your business - Infurnus is just a call away.</p>
+<div class="cta-buttons">
+<a href="tel:919153787859" class="btn btn-primary"><i class="fas fa-phone"></i> Call to Book</a>
+<a href="https://wa.me/919153787859" class="btn btn-outline"><i class="fab fa-whatsapp"></i> WhatsApp Us</a>
+</div>
+<a href="tel:919153787859" class="cta-phone"><i class="fas fa-phone-alt"></i> +91 91537 87859</a>
+<p style="margin-top:1.5rem;color:var(--text-muted);font-size:.9rem;"><i class="fas fa-map-marker-alt" style="color:var(--accent);"></i> Corporate Office: Patna, Bihar</p>
+</div>
+</section>
+
+<footer>
+<div class="footer-grid">
+<div class="footer-brand">
+<a href="#" class="logo"><i class="fas fa-fire"></i> Infur<span>nus</span></a>
+<p>Bihar's trusted partner for logistics and transportation. Connecting people and businesses across all 38 districts with reliable, safe, and efficient vehicle services.</p>
+<div class="social-links">
+<a href="#"><i class="fab fa-facebook-f"></i></a>
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-column">
+<h4>Services</h4>
+<ul>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Logistics</a></li>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Intercity Cabs</a></li>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Hourly Rentals</a></li>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Daily Packages</a></li>
+</ul>
+</div>
+<div class="footer-column">
+<h4>Company</h4>
+<ul>
+<li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Our Fleet</a></li>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Careers</a></li>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+</ul>
+</div>
+<div class="footer-column">
+<h4>Support</h4>
+<ul>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Help Center</a></li>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Track Shipment</a></li>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Terms of Service</a></li>
+<li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>&copy; 2026 Infurnus. All rights reserved. Made with pride in Patna, Bihar.</p>
+<p>Designed for Bihar, Built for Growth.</p>
+</div>
+</footer>
+
+<div class="chat-widget">
+<button class="chat-toggle" id="chatToggle">
+<i class="fas fa-comments chat-icon"></i>
+<i class="fas fa-times close-icon"></i>
+<span class="chat-badge">1</span>
+</button>
+<div class="chat-box" id="chatBox">
+<div class="chat-header">
+<div class="chat-avatar">I</div>
+<div class="chat-header-info">
+<h4>Infurnus Support</h4>
+<span>Online</span>
+</div>
+</div>
+<div class="chat-body" id="chatBody">
+<div class="chat-message bot">Hello! Welcome to Infurnus. How can I help you today?</div>
+<div class="chat-quick-replies">
+<span class="chat-quick-reply" data-reply="Book a cab">Book a cab</span>
+<span class="chat-quick-reply" data-reply="Logistics quote">Logistics quote</span>
+<span class="chat-quick-reply" data-reply="Pricing info">Pricing info</span>
+<span class="chat-quick-reply" data-reply="Talk to agent">Talk to agent</span>
+</div>
+</div>
+<div class="chat-footer">
+<input type="text" class="chat-input" id="chatInput" placeholder="Type your message...">
+<button class="chat-send" id="chatSend"><i class="fas fa-paper-plane"></i></button>
+</div>
+</div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
