@@ -1,4 +1,6 @@
-const API_BASE_URL = window.location.origin.includes('localhost') ? 'http://localhost:3000/api' : '/api';
+const API_BASE_URL = window.location.origin.includes('localhost') 
+  ? 'http://localhost:3000/api' 
+  : 'https://infurnus-backend.onrender.com/api';
 
 function showToast(message, type = 'success') {
     const container = document.getElementById('toastContainer');
