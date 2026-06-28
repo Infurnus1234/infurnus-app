@@ -225,17 +225,17 @@ document.getElementById('logisticsForm').addEventListener('submit', async (e) =>
     e.preventDefault();
     const formData = new FormData(e.target);
     const data = {
-        bookingType: 'logistics',
-        companyName: formData.get('companyName'),
-        phone: formData.get('phone'),
-        pickupAddress: formData.get('pickupAddress'),
-        dropAddress: formData.get('dropAddress'),
-        cargoType: formData.get('cargoType'),
-        vehicleRequired: formData.get('vehicleRequired'),
-        cargoWeight: formData.get('cargoWeight'),
-        pickupDate: formData.get('pickupDate'),
-        cargoDescription: formData.get('cargoDescription')
-    };
+    bookingType: 'logistics',
+    fullName: formData.get('companyName'),
+    phone: formData.get('phone'),
+    pickupLocation: formData.get('pickupAddress'),
+    dropLocation: formData.get('dropAddress'),
+    cargoType: formData.get('cargoType'),
+    vehicleRequired: formData.get('vehicleRequired'),
+    cargoWeight: formData.get('cargoWeight'),
+    pickupDate: formData.get('pickupDate'),
+    cargoDescription: formData.get('cargoDescription')
+};
     try {
         const response = await fetch(`${API_BASE_URL}/bookings`, {
             method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data)

@@ -1,4 +1,6 @@
-const API_BASE = '';
+const API_BASE = window.location.origin.includes('localhost') 
+  ? 'http://localhost:3000' 
+  : 'https://infurnus-backend.onrender.com';
 let authToken = localStorage.getItem('infurnus_admin_token') || '';
 let currentBookings = [];
 let currentDrivers = [];
