@@ -10,7 +10,7 @@ const app = express();
 const googleMapsClient = new Client({});
 
 app.use(cors({
-  origin: ['https://beamish-madeleine-af20be.netlify.app', 'https://infurnuslogistics.com', 'https://www.infurnuslogistics.com'],
+  origin: ['https://beamish-madeleine-af20be.netlify.app', 'https://www.infurnuslogistics.com', 'https://admin.infurnuslogistics.com'],
   credentials: true
 }));
 app.use(express.json());
