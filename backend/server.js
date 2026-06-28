@@ -9,7 +9,10 @@ dotenv.config();
 const app = express();
 const googleMapsClient = new Client({});
 
-app.use(cors());
+app.use(cors({
+  origin: ['https://beamish-madeleine-af20be.netlify.app', 'https://infurnuslogistics.com', 'https://www.infurnuslogistics.com'],
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
